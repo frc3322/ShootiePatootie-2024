@@ -35,7 +35,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
-public class DriveSubsystem extends SubsystemBase implements Loggable{
+public class FloopIntake extends SubsystemBase implements Loggable{
   
   // Create MAXSwerveModules
   private final MAXSwerveModule m_frontLeft = new MAXSwerveModule(
@@ -97,7 +97,7 @@ public class DriveSubsystem extends SubsystemBase implements Loggable{
   private String ampLineupPathName = "AmpLineup";
 
   /** Creates a new DriveSubsystem. */
-  public DriveSubsystem() {
+  public FloopIntake() {
     estimatedPose = new SwerveDrivePoseEstimator(
       DriveConstants.kDriveKinematics, 
       Rotation2d.fromDegrees(getAngle()), 
