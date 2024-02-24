@@ -9,7 +9,13 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.FollowPathHolonomic;
 import com.pathplanner.lib.commands.PathfindThenFollowPathHolonomic;
 import com.pathplanner.lib.path.PathPlannerPath;
+import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkFlex;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -27,14 +33,60 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.CANIds;
 import frc.robot.Constants.DriveConstants;
-import frc.robot.Constants.LimeLightConstants;
+import frc.robot.Constants.FloopIntakeConstants.ShooterConstants;
 import frc.utils.SwerveUtils;
 import io.github.oblarg.oblog.Loggable;
+import io.github.oblarg.oblog.annotations.Config;
 import io.github.oblarg.oblog.annotations.Log;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
-public class Shooter{
+public class Shooter extends SubsystemBase implements Loggable{
+  private final CANSparkFlex shooterMotor = new CANSparkFlex(CANIds.kShooterTopMotorCanId, MotorType.kBrushless);
+  private final RelativeEncoder shooterEncoder = shooterMotor.getEncoder();
   
+  private final PIDController shooterRPMController = new PIDController(
+    ShooterConstants.shooterTopP,
+    ShooterConstants.shooterTopI, 
+    ShooterConstants.shooterTopD
+  );
+  
+  public Shooter(){
+    shooterMotor.restoreFactoryDefaults();
+    shooterMotor.setIdleMode(IdleMode.kCoast);
+    shooterMotor.burnFlash();
+
   }
+
+  
+  /*◇─◇──◇─◇
+  ✨Getters✨
+  ◇─◇──◇─◇*/
+  @Log
+  public double shooterRPM(){
+    return shooterEncoder.getVelocity();
+  }
+
+  /*◇─◇──◇─◇
+  ✨Setters✨
+  ◇─◇──◇─◇*/
+
+  @Config
+  public void setShooterSpeed(double speed){
+    shooterMotor.set(speed);
+  }
+
+  @Config
+  public void setRPMSetpoint(double rpm){
+    shooterRPMController.setSetpoint(rpm);
+  }
+
+
+
+   /*◇─◇──◇─◇
+  ✨Commands✨
+  ◇─◇──◇─◇*/
+
+}
+

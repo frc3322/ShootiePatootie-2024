@@ -45,23 +45,15 @@ public final class Constants {
     public static final int kFrontRightTurningCanId = 36;
     public static final int kRearRightTurningCanId = 12;
 
-    // Elevator CAN IDs - front is shooter side
-    public static final int kElevatorLeftCanId = 10;
-    public static final int kElevatorRightCanId = 11;
-
     // Intake CAN IDs
-    public static final int kIntakePivotLeftCanId = 13;
-    public static final int kIntakePivotRightCanId = 12;
-    public static final int kIntakeWheelsCanId = 14;
 
-    // Transfer ID
-    public static final int kTransferCanId = 15;
+    public static final int kIntakeCanID = 10;
+    public static final int kIntakeTurnPitchCanID = 0;
 
     // Shooter IDs
-    public static final int kShooterTopCanId = 17;
-    public static final int kShooterBottomCanId = 16;
-    public static final int kShooterPivotCanId = 63;
-    public static final int kShooterTransferCanId = 18;
+    public static final int kShooterTopMotorCanId = 10;
+
+    //
   }
 
   public static final class DriveConstants {
@@ -81,7 +73,7 @@ public final class Constants {
     public static final double kWheelBase = Units.inchesToMeters(24.375);
     // Distance from center of robot to furthest wheel
     public static final double kWheelRadius = Units.inchesToMeters(34.5);
-    
+
     public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
         new Translation2d(kWheelBase / 2, kTrackWidth / 2),
         new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
@@ -99,12 +91,15 @@ public final class Constants {
   }
 
   public static final class ModuleConstants {
-    // The MAXSwerve module can be configured with one of three pinion gears: 12T, 13T, or 14T.
-    // This changes the drive speed of the module (a pinion gear with more teeth will result in a
+    // The MAXSwerve module can be configured with one of three pinion gears: 12T,
+    // 13T, or 14T.
+    // This changes the drive speed of the module (a pinion gear with more teeth
+    // will result in a
     // robot that drives faster).
     public static final int kDrivingMotorPinionTeeth = 14;
 
-    // Invert the turning encoder, since the output shaft rotates in the opposite direction of
+    // Invert the turning encoder, since the output shaft rotates in the opposite
+    // direction of
     // the steering motor in the MAXSwerve Module.
     public static final boolean kTurningEncoderInverted = true;
 
@@ -112,7 +107,8 @@ public final class Constants {
     public static final double kDrivingMotorFreeSpeedRps = NeoMotorConstants.kFreeSpeedRpm / 60;
     public static final double kWheelDiameterMeters = 0.0762;
     public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI;
-    // 45 teeth on the wheel's bevel gear, 22 teeth on the first-stage spur gear, 15 teeth on the bevel pinion
+    // 45 teeth on the wheel's bevel gear, 22 teeth on the first-stage spur gear, 15
+    // teeth on the bevel pinion
     public static final double kDrivingMotorReduction = (45.0 * 22) / (kDrivingMotorPinionTeeth * 15);
     public static final double kDriveWheelFreeSpeedRps = (kDrivingMotorFreeSpeedRps * kWheelCircumferenceMeters)
         / kDrivingMotorReduction;
@@ -127,7 +123,7 @@ public final class Constants {
 
     public static final double kTurningEncoderPositionPIDMinInput = 0; // radians
     public static final double kTurningEncoderPositionPIDMaxInput = kTurningEncoderPositionFactor; // radians
-    
+
     public static final double kDrivingP = 0.04;
     public static final double kDrivingI = 0;
     public static final double kDrivingD = 0;
@@ -149,68 +145,28 @@ public final class Constants {
     public static final int kTurningMotorCurrentLimit = 20; // amps
   }
 
-  public static final class ElevatorConstants{
-    public static final double elevatorP = 0.1;
-    public static final double elevatorI = 0.002;
-    public static final double elevatorD = 0;
-    public static final double velocityConstraint = 500;
-    public static final double accelerationConstraint = 500;
-
-    public static final double elevatorBottomPosition = .2;
-    public static final double elevatorAmpPosition = 15.5;
-    public static final double elevatorTopPosition = 18.5;
-    
-    public static final double elevatorBottomThreshold = 0;
-    public static final double elevatorTopThreshold = 0;
-
-    public static final double elevatorGearRatio = 1 / (12 * .14);
-    public static final double elevatorPositionThreshold = 1;
-  }
-
-  public static final class TransferConstants {
-    public static final double transferSpeed = 1;
-    public static final double shootWaitTime = 0.1;
-
-    public static final double transferWaitTimeToIntake = .05;
-  }
-
-  public static final class ShooterConstants{
-    public static final double shooterTopP = 0.0002;
-    public static final double shooterTopI = 0;
-    public static final double shooterTopD = 0;
-
-    public static final double shooterBottomP = 0.000001;
-    public static final double shooterBottomI = 0;
-    public static final double shooterBottomD = 0;
-
-    public static final double shooterTopV = 0.00018;
-    public static final double shooterBottomV = 0.00018;
-
-    public static final double shootingRMPAutoLine = 3000;
-
-    public static final double shooterRPMThreshold = 100;
-
-    public static final double shooterAutoRPMThreshold = 2000;
-  }
-
-  public static final class IntakeConstants {
-    //PID Constants
-    public static final double intakeP = 3;
+  public static final class FloopIntakeConstants {
+    public static final int kIntakePistonOut = 1;
+    public static final int kIntakePistonIn = 2;
+    public static final double intakeP = 0;
     public static final double intakeI = 0;
     public static final double intakeD = 0;
-    public static final double velocityConstraint = 30;
-    public static final double accelerationConstraint = 30;
+    public static final double velocityConstraint = 0;
+    public static final double accelerationConstraint = 0;
 
-    public static final double groundPosition = 0.385;
-    public static final double stowPosition = 0;
-    public static final double ampPosition = .07;
+    
 
-    public static final double groundIntakeSpeed = 1;
+    public static final class TransferConstants {
+    }
 
-    public static final double kTurnToleranceDeg = 0.5;
-    public static final double kTurnRateToleranceDegPerS = 5;
+    public static final class ShooterConstants {
 
-    public static final double kIntakeArmGearRatio = 1/60.714;
+      public static final double shooterTopP = 0;
+      public static final double shooterTopI = 0;
+      public static final double shooterTopD = 0;
+
+    }
+
   }
 
   public static final class OIConstants {
@@ -237,19 +193,26 @@ public final class Constants {
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
         kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
 
-    public static final HolonomicPathFollowerConfig holonomicPathFollowerConfig = new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-      new PIDConstants(kPHoloTranslationController, 0.0, 0.0), // Translation PID constants
-      new PIDConstants(kPHoloRotationController, 0.0, 0.0), // Rotation PID constants
-      4.5, // Max module speed, in m/s
-      DriveConstants.kWheelRadius, // Drive base radius in meters. Distance from robot center to furthest module.
-      new ReplanningConfig() // Default path replanning config. See the API for the options here
+    public static final HolonomicPathFollowerConfig holonomicPathFollowerConfig = new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig,
+                                                                                                                   // this
+                                                                                                                   // should
+                                                                                                                   // likely
+                                                                                                                   // live
+                                                                                                                   // in
+                                                                                                                   // your
+                                                                                                                   // Constants
+                                                                                                                   // class
+        new PIDConstants(kPHoloTranslationController, 0.0, 0.0), // Translation PID constants
+        new PIDConstants(kPHoloRotationController, 0.0, 0.0), // Rotation PID constants
+        4.5, // Max module speed, in m/s
+        DriveConstants.kWheelRadius, // Drive base radius in meters. Distance from robot center to furthest module.
+        new ReplanningConfig() // Default path replanning config. See the API for the options here
     );
 
-    public static final PathConstraints constraints = new PathConstraints(kMaxSpeedMetersPerSecond, 
-      kMaxAccelerationMetersPerSecondSquared, 
-      Units.radiansToDegrees(kMaxAngularSpeedRadiansPerSecond), 
-      Units.radiansToDegrees(kMaxAngularSpeedRadiansPerSecondSquared)
-    );
+    public static final PathConstraints constraints = new PathConstraints(kMaxSpeedMetersPerSecond,
+        kMaxAccelerationMetersPerSecondSquared,
+        Units.radiansToDegrees(kMaxAngularSpeedRadiansPerSecond),
+        Units.radiansToDegrees(kMaxAngularSpeedRadiansPerSecondSquared));
   }
 
   public static final class NeoMotorConstants {
@@ -259,33 +222,24 @@ public final class Constants {
   }
 
   public static final class FieldConstants {
-    // Starting note transforms - Top is amp. Notes are 5ft 6in apart, with one centered on the line
+    // Starting note transforms - Top is amp. Notes are 5ft 6in apart, with one
+    // centered on the line
     public static final Translation2d centerTopPose = new Translation2d(0, Units.feetToMeters(11));
     public static final Translation2d centerMidTopPose = new Translation2d(0, Units.feetToMeters(5.5));
     public static final Translation2d centerMidPose = new Translation2d(0, Units.feetToMeters(11));
     public static final Translation2d centerMidBottomPose = new Translation2d(0, Units.feetToMeters(-5.5));
     public static final Translation2d centerBottomPose = new Translation2d(0, Units.feetToMeters(-11));
 
-    // Amp poses. Both halves of the field together are 651.25 in long, and amp is 4 ft 1.5 in from the wall.
-    // The top wall that the amp is in is 161.625 from the center of the field. Needs to have an offset subtracted from it later
+    // Amp poses. Both halves of the field together are 651.25 in long, and amp is 4
+    // ft 1.5 in from the wall.
+    // The top wall that the amp is in is 161.625 from the center of the field.
+    // Needs to have an offset subtracted from it later
     public static final Pose2d redAmpPose = new Pose2d(
-      new Translation2d(Units.inchesToMeters(325.625 - 49.5), Units.inchesToMeters(161.625)),
-      new Rotation2d(-90)
-    );
-    
+        new Translation2d(Units.inchesToMeters(325.625 - 49.5), Units.inchesToMeters(161.625)),
+        new Rotation2d(-90));
+
     public static final Pose2d blueAmpPose = new Pose2d(
-      new Translation2d(-Units.inchesToMeters(325.625 - 49.5), Units.inchesToMeters(161.625)),
-      new Rotation2d(90)
-    );
-  }
-
-  public static class LimeLightConstants {
-    // threshold values used for desiding what sensor inputs are averaged to detect robot pose (meters)
-    public static final double xyThreshold = 0.1;
-    public static final double turnRateThreshold = 4; // if rotating above value in rps will not use vision
-
-    // offset used to convert lime light field space (0,0 is center of field) to wpilib field space (bottom left is 0,0)
-    public static final double fieldLengthOffset = Units.inchesToMeters(651.25 / 2);
-    public static final double fieldWidthOffset = Units.inchesToMeters(323.25 / 2);
+        new Translation2d(-Units.inchesToMeters(325.625 - 49.5), Units.inchesToMeters(161.625)),
+        new Rotation2d(90));
   }
 }
