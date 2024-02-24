@@ -10,6 +10,7 @@ import com.pathplanner.lib.commands.FollowPathHolonomic;
 import com.pathplanner.lib.commands.PathfindThenFollowPathHolonomic;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -60,7 +61,16 @@ public class FloopIntake{
       FloopIntakeConstants.accelerationConstraint
       )
     );
+  public FloopIntake(){
+    intake.restoreFactoryDefaults();
+    intakeTurnPitch.restoreFactoryDefaults();
 
+    intake.setIdleMode(IdleMode.kCoast);
+    intakeTurnPitch.setIdleMode(IdleMode.kBrake);
+
+    intake.burnFlash();
+    intakeTurnPitch.burnFlash();
+  }
   /*◇─◇──◇─◇
   ✨Getters✨
   ◇─◇──◇─◇*/
