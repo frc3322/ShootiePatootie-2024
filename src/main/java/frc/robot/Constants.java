@@ -33,17 +33,18 @@ public final class Constants {
 
   public static final class CANIds {
     // SPARK MAX CAN IDs
-    public static final int kFrontLeftDrivingCanId = 13;
-    public static final int kRearLeftDrivingCanId = 7;
+    public static final int kFrontLeftDrivingCanId = 20;
+    public static final int kFrontLeftTurningCanId = 13;
 
     public static final int kFrontRightDrivingCanId = 40;
-    public static final int kRearRightDrivingCanId = 55;
+    public static final int kRearRightTurningCanId = 12;
 
-    public static final int kFrontLeftTurningCanId = 20;
+    public static final int kRearLeftDrivingCanId = 7;
     public static final int kRearLeftTurningCanId = 23;
 
+    public static final int kRearRightDrivingCanId = 55;
     public static final int kFrontRightTurningCanId = 36;
-    public static final int kRearRightTurningCanId = 12;
+
 
     // Intake CAN IDs
 
@@ -51,7 +52,9 @@ public final class Constants {
     public static final int kIntakeTurnPitchCanID = 10;
 
     // Shooter IDs
-    public static final int kShooterTopMotorCanId = 29;
+    public static final int kShooterAngleMotorCanId = 29;
+    public static final int kShooterLeftMotorCanId = 59;
+    public static final int kShooterRightMotorCanId = 62;
 
     //
   }

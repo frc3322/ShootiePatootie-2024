@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -118,6 +119,14 @@ public class RobotContainer {
   /*◇─◇──◇─◇
   ✨FloopIntake✨
   ◇─◇──◇─◇*/
+  driverController.rightBumper()
+        .whileTrue(new RunCommand(
+            () -> intake.setIntakeSpeed(0.2),
+            intake ));
+  driverController.leftBumper()
+        .whileTrue(new RunCommand(
+            () -> intake.setIntakeSpeed(-0.2),
+            intake ));
 /* 
     secondaryController.x()
             .onTrue(new RunCommand( () -> intake.set) )

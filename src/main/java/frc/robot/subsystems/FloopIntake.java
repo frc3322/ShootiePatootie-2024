@@ -45,7 +45,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.FloopIntakeConstants;
 import frc.robot.Constants.CANIds;
 
-public class FloopIntake{
+public class FloopIntake extends SubsystemBase implements Loggable{
   private final CANSparkMax intake = new CANSparkMax(CANIds.kIntakeCanID, MotorType.kBrushless);
   private final CANSparkMax intakeTurnPitch = new CANSparkMax(CANIds.kIntakeTurnPitchCanID, MotorType.kBrushless);
 
@@ -98,6 +98,11 @@ public class FloopIntake{
   @Config
   public void setPitchSetpoint(double setpoint) {
     intakePIDController.setGoal(setpoint);
+  }
+
+  @Config
+  public void setIntakeSpeed(double speed){
+    intake.set(speed);
   }
 
 

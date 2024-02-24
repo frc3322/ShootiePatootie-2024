@@ -43,8 +43,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class Shooter extends SubsystemBase implements Loggable{
-  private final CANSparkFlex shooterMotor = new CANSparkFlex(CANIds.kShooterTopMotorCanId, MotorType.kBrushless);
-  private final RelativeEncoder shooterEncoder = shooterMotor.getEncoder();
+  private final CANSparkFlex shooterAngleMotor = new CANSparkFlex(CANIds.kShooterAngleMotorCanId, MotorType.kBrushless);
+  private final CANSparkFlex shooterLeft = new CANSparkFlex(CANIds.kShooterLeftMotorCanId, MotorType.kBrushless);
+  private final CANSparkFlex shooterRight = new CANSparkFlex(CANIds.kShooterRightMotorCanId, MotorType.kBrushless);
+
+  private final RelativeEncoder shooterEncoder = shooterAngleMotor.getEncoder();
+  private final RelativeEncoder shooterLeftEncoder = shooterAngleMotor.getEncoder();
+  private final RelativeEncoder shooterRightEncoder = shooterAngleMotor.getEncoder();
   
   private final PIDController shooterRPMController = new PIDController(
     ShooterConstants.shooterTopP,
@@ -53,9 +58,18 @@ public class Shooter extends SubsystemBase implements Loggable{
   );
   
   public Shooter(){
-    shooterMotor.restoreFactoryDefaults();
-    shooterMotor.setIdleMode(IdleMode.kCoast);
-    shooterMotor.burnFlash();
+    shooterAngleMotor.restoreFactoryDefaults();
+    shooterLeft.restoreFactoryDefaults();
+    shooterRight.restoreFactoryDefaults();
+    
+
+    shooterAngleMotor.setIdleMode(IdleMode.kCoast);
+    shooterLeft.setIdleMode(IdleMode.kCoast);
+    shooterRight.setIdleMode(IdleMode.kCoast);
+
+    shooterAngleMotor.burnFlash();
+    shooterLeft.burnFlash();
+    shooterRight.burnFlash();
 
   }
 
@@ -74,7 +88,8 @@ public class Shooter extends SubsystemBase implements Loggable{
 
   @Config
   public void setShooterSpeed(double speed){
-    shooterMotor.set(speed);
+    shooterLeft.set(speed);
+    shooterRight.set(speed);
   }
 
   @Config
@@ -82,8 +97,7 @@ public class Shooter extends SubsystemBase implements Loggable{
     shooterRPMController.setSetpoint(rpm);
   }
 
-
-
+  
    /*◇─◇──◇─◇
   ✨Commands✨
   ◇─◇──◇─◇*/
