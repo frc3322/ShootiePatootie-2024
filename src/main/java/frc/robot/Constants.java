@@ -48,13 +48,13 @@ public final class Constants {
 
     // Intake CAN IDs
 
-    public static final int kIntakeCanID = 8;
-    public static final int kIntakeTurnPitchCanID = 10;
+    public static final int kIntakeCanID = 12;
+    public static final int kIntakeTurnPitchCanID = 61;
 
     // Shooter IDs
-    public static final int kShooterAngleMotorCanId = 29;
-    public static final int kShooterLeftMotorCanId = 59;
-    public static final int kShooterRightMotorCanId = 62;
+    public static final int kShooterAngleMotorCanId = 10;
+    public static final int kShooterLeftMotorCanId = 62;
+    public static final int kShooterRightMotorCanId = 59;
 
     //
   }
@@ -164,9 +164,9 @@ public final class Constants {
 
     public static final class ShooterConstants {
 
-      public static final double shooterTopP = 0;
-      public static final double shooterTopI = 0;
-      public static final double shooterTopD = 0;
+      public static final double shooterAngleP = 0;
+      public static final double shooterAngleI = 0;
+      public static final double shooterAngleD = 0.001;
 
     }
 

@@ -43,7 +43,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class Shooter extends SubsystemBase implements Loggable{
-  private final CANSparkFlex shooterAngleMotor = new CANSparkFlex(CANIds.kShooterAngleMotorCanId, MotorType.kBrushless);
+  private final CANSparkMax shooterAngleMotor = new CANSparkMax(CANIds.kShooterAngleMotorCanId, MotorType.kBrushless);
   private final CANSparkFlex shooterLeft = new CANSparkFlex(CANIds.kShooterLeftMotorCanId, MotorType.kBrushless);
   private final CANSparkFlex shooterRight = new CANSparkFlex(CANIds.kShooterRightMotorCanId, MotorType.kBrushless);
 
@@ -51,10 +51,10 @@ public class Shooter extends SubsystemBase implements Loggable{
   private final RelativeEncoder shooterLeftEncoder = shooterAngleMotor.getEncoder();
   private final RelativeEncoder shooterRightEncoder = shooterAngleMotor.getEncoder();
   
-  private final PIDController shooterRPMController = new PIDController(
-    ShooterConstants.shooterTopP,
-    ShooterConstants.shooterTopI, 
-    ShooterConstants.shooterTopD
+  private final PIDController shooterAngleController = new PIDController(
+    ShooterConstants.shooterAngleP,
+    ShooterConstants.shooterAngleI, 
+    ShooterConstants.shooterAngleD
   );
   
   public Shooter(){
@@ -66,6 +66,8 @@ public class Shooter extends SubsystemBase implements Loggable{
     shooterAngleMotor.setIdleMode(IdleMode.kCoast);
     shooterLeft.setIdleMode(IdleMode.kCoast);
     shooterRight.setIdleMode(IdleMode.kCoast);
+
+    shooterLeft.setInverted(true);
 
     shooterAngleMotor.burnFlash();
     shooterLeft.burnFlash();
@@ -91,12 +93,10 @@ public class Shooter extends SubsystemBase implements Loggable{
     shooterLeft.set(speed);
     shooterRight.set(speed);
   }
-
   @Config
-  public void setRPMSetpoint(double rpm){
-    shooterRPMController.setSetpoint(rpm);
+  public void moveShooterAngle(double speed){
+    shooterAngleMotor.set(speed);
   }
-
   
    /*◇─◇──◇─◇
   ✨Commands✨
