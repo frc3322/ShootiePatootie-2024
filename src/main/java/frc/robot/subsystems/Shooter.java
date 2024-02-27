@@ -87,9 +87,9 @@ public class Shooter extends SubsystemBase implements Loggable{
   ◇─◇──◇─◇*/
 
   @Config
-  public void setShooterSpeed(double speed){
-    shooterLeft.set(speed);
-    shooterRight.set(speed);
+  public void setShooterSpeed(double fireRate){
+    shooterLeft.set(-fireRate);
+    shooterRight.set(fireRate);
   }
 
   @Config

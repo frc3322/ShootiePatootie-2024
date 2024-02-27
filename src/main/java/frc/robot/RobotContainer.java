@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.Constants.OIConstants;
+import frc.robot.Constants.FloopIntakeConstants.ShooterConstants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.FloopIntake;
 import frc.robot.subsystems.Shooter;
@@ -41,7 +42,6 @@ public class RobotContainer {
   // Secondary controller
   CommandXboxController secondaryController = new CommandXboxController(OIConstants.kSecondaryControllerPort);
 
-
   SendableChooser<SequentialCommandGroup> autoSelector = new SendableChooser<>();
 
   /**
@@ -50,21 +50,23 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    
+
     // Configure Oblog logger
     Logger.configureLoggingAndConfig(this, true);
 
     // Auton selector config
-   //  autoSelector.setDefaultOption("Test", new Test4And1Auto());
+    // autoSelector.setDefaultOption("Test", new Test4And1Auto());
 
     autoSelector.addOption("No auto", null);
 
     // Configure default commands
 
-    /*◇─◇──◇─◇
-     Drivetrain
-    ◇─◇──◇─◇*/
-    
+    /*
+     * ◇─◇──◇─◇
+     * Drivetrain
+     * ◇─◇──◇─◇
+     */
+
     robotDrive.setDefaultCommand(
         // The left stick controls translation of the robot.
         // Turning is controlled by the X axis of the right stick.
@@ -76,13 +78,13 @@ public class RobotContainer {
                 true, true),
             robotDrive));
 
-    /*◇─◇──◇─◇
-      Elevator
-    ◇─◇──◇─◇*/
+    /*
+     * ◇─◇──◇─◇
+     * Elevator
+     * ◇─◇──◇─◇
+     */
 
-    
   }
-
 
   /**
    * Use this method to define your button->command mappings. Buttons can be
@@ -113,7 +115,11 @@ public class RobotContainer {
   
   driverController.y()
         .whileTrue(new RunCommand(
-            () -> shooter.setShooterSpeed(0.5),
+            () -> shooter.setShooterSpeed(ShooterConstants.SHOOT),
+            shooter));
+
+  driverController.a() .whileTrue(new RunCommand(
+            () -> shooter.setShooterSpeed(0),
             shooter));
   
   /*◇─◇──◇─◇
@@ -127,11 +133,14 @@ public class RobotContainer {
         .whileTrue(new RunCommand(
             () -> intake.setIntakeSpeed(-0.2),
             intake ));
-/* 
-    secondaryController.x()
-            .onTrue(new RunCommand( () -> intake.set) )
+ driverController.leftTrigger()
+        .whileTrue(new RunCommand(
+          () -> intake.setIntakeSpeed(0), intake));
+
+
+
 
    
-            */
+            
   }
 }

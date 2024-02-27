@@ -101,8 +101,8 @@ public class FloopIntake extends SubsystemBase implements Loggable{
   }
 
   @Config
-  public void setIntakeSpeed(double speed){
-    intake.set(speed);
+  public void setIntakeSpeed(double suckSpeed){
+    intake.set(suckSpeed);
   }
 
 
