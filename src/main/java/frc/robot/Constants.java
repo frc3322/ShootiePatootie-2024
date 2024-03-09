@@ -32,17 +32,17 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
 
   public static final class CANIds {
-    // SPARK MAX CAN IDs
-    public static final int kFrontLeftDrivingCanId = 20;
+    // SPARK MAX and FLEX CAN IDs
+    public static final int kFrontLeftDrivingCanId = 47;
     public static final int kFrontLeftTurningCanId = 13;
 
-    public static final int kFrontRightDrivingCanId = 40;
+    public static final int kFrontRightDrivingCanId = 48;
     public static final int kRearRightTurningCanId = 12;
 
-    public static final int kRearLeftDrivingCanId = 7;
+    public static final int kRearLeftDrivingCanId = 49;
     public static final int kRearLeftTurningCanId = 23;
 
-    public static final int kRearRightDrivingCanId = 55;
+    public static final int kRearRightDrivingCanId = 51;
     public static final int kFrontRightTurningCanId = 36;
 
 
