@@ -121,21 +121,20 @@ public class RobotContainer {
   driverController.a() .whileTrue(new RunCommand(
             () -> shooter.setShooterSpeed(0),
             shooter));
+  driverController.x() .whileTrue(new RunCommand(
+            () -> shooter.pointShooter(0.5),
+            shooter));
+  driverController.b() .whileTrue(new RunCommand(
+            () -> shooter.pointShooter(-0.5),
+            shooter));
+  // lock angle
+ driverController.rightStick() .whileTrue(new RunCommand(
+            () -> shooter.pointShooter(0),
+            shooter));
   
   /*◇─◇──◇─◇
   ✨FloopIntake✨
   ◇─◇──◇─◇*/
-  driverController.rightBumper()
-        .whileTrue(new RunCommand(
-            () -> intake.setIntakeSpeed(0.2),
-            intake ));
-  driverController.leftBumper()
-        .whileTrue(new RunCommand(
-            () -> intake.setIntakeSpeed(-0.2),
-            intake ));
- driverController.leftTrigger()
-        .whileTrue(new RunCommand(
-          () -> intake.setIntakeSpeed(0), intake));
 
 
 

@@ -96,6 +96,9 @@ public class Shooter extends SubsystemBase implements Loggable{
   public void setRPMSetpoint(double rpm){
     shooterRPMController.setSetpoint(rpm);
   }
+  public void pointShooter (double movement){
+    shooterAngleMotor.set(movement);
+  }
 
   
    /*◇─◇──◇─◇
