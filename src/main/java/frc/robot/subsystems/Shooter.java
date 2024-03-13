@@ -43,7 +43,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class Shooter extends SubsystemBase implements Loggable{
-  private final CANSparkFlex shooterAngleMotor = new CANSparkFlex(CANIds.kShooterAngleMotorCanId, MotorType.kBrushless);
+  private final CANSparkMax shooterAngleMotor = new CANSparkMax(CANIds.kShooterAngleMotorCanId, MotorType.kBrushless);
   private final CANSparkFlex shooterLeft = new CANSparkFlex(CANIds.kShooterLeftMotorCanId, MotorType.kBrushless);
   private final CANSparkFlex shooterRight = new CANSparkFlex(CANIds.kShooterRightMotorCanId, MotorType.kBrushless);
 
@@ -96,8 +96,14 @@ public class Shooter extends SubsystemBase implements Loggable{
   public void setRPMSetpoint(double rpm){
     shooterRPMController.setSetpoint(rpm);
   }
-  public void pointShooter (double movement){
-    shooterAngleMotor.set(movement);
+  @Config
+  public void pointShooter(double speed){
+    shooterAngleMotor.set(speed);
+       shooterAngleMotor.setIdleMode(IdleMode.kCoast);
+  }
+  public void stopPointShooter(double speed){
+    shooterAngleMotor.set(speed);
+   shooterAngleMotor.setIdleMode(IdleMode.kBrake);
   }
 
   

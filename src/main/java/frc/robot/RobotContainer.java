@@ -118,18 +118,16 @@ public class RobotContainer {
             () -> shooter.setShooterSpeed(ShooterConstants.SHOOT),
             shooter));
 
-  driverController.a() .whileTrue(new RunCommand(
+  driverController.a().whileTrue(new RunCommand(
             () -> shooter.setShooterSpeed(0),
             shooter));
-  driverController.x() .whileTrue(new RunCommand(
-            () -> shooter.pointShooter(0.5),
+
+  driverController.b().whileTrue(new RunCommand(
+            () -> shooter.pointShooter(0.25),
             shooter));
-  driverController.b() .whileTrue(new RunCommand(
-            () -> shooter.pointShooter(-0.5),
-            shooter));
-  // lock angle
- driverController.rightStick() .whileTrue(new RunCommand(
-            () -> shooter.pointShooter(0),
+            
+             driverController.b().whileFalse(new RunCommand(
+            () -> shooter.stopPointShooter(0),
             shooter));
   
   /*◇─◇──◇─◇
