@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Constants.FloopIntakeConstants.ShooterConstants;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.FloopIntake;
 import frc.robot.subsystems.Shooter;
 import io.github.oblarg.oblog.Logger;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -35,7 +34,7 @@ public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem robotDrive = new DriveSubsystem();
   private final Shooter shooter = new Shooter();
-  private final FloopIntake intake = new FloopIntake();
+  
 
   // The driver's controller
   CommandXboxController driverController = new CommandXboxController(OIConstants.kDriverControllerPort);
