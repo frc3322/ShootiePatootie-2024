@@ -92,22 +92,16 @@ public class DriveSubsystem extends SubsystemBase implements Loggable{
   @Log
   public Field2d field = new Field2d();
 
-  // Path strings
-  private String ampLineupPathName = "AmpLineup";
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
-    estimatedPose = new SwerveDrivePoseEstimator(
-      DriveConstants.kDriveKinematics, 
-      Rotation2d.fromDegrees(getAngle()), 
-      getModulePositions(), getPose()
-      );
+    
     
 
     // Configure AutoBuilder last
     AutoBuilder.configureHolonomic(
-      this::getPose, // Robot pose supplier
-      this::resetEstimatedPose, // Method to reset odometry (will be called if your auto has a starting pose)
+      this::getPose,
+      this::resetOdometry, // Robot pose supplier// Method to reset odometry (will be called if your auto has a starting pose)
       this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
       this::autoDrive, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
       AutoConstants.holonomicPathFollowerConfig,
@@ -157,17 +151,7 @@ public class DriveSubsystem extends SubsystemBase implements Loggable{
         pose);
   }
 
-  public void resetEstimatedPose(Pose2d pose){
-    estimatedPose.resetPosition(
-      Rotation2d.fromDegrees(getAngle()),
-      new SwerveModulePosition[] {
-            m_frontLeft.getPosition(),
-            m_frontRight.getPosition(),
-            m_rearLeft.getPosition(),
-            m_rearRight.getPosition()
-        },
-      pose);
-  }
+
 
   /*◇─◇──◇─◇
       Drive
@@ -311,40 +295,9 @@ public class DriveSubsystem extends SubsystemBase implements Loggable{
    * @param path The path to move to and follow
    * @return The pathfinding and following command
    */
-  public Command pathfindThenFollowPath(PathPlannerPath path) {
-    return new PathfindThenFollowPathHolonomic(
-        path,
-        AutoConstants.constraints,
-        this::getPose,
-        this::getRobotRelativeSpeeds,
-        this::autoDrive,
-        AutoConstants.holonomicPathFollowerConfig, // HolonomicPathFollwerConfig, see the API or "Follow a single path" example for more info
-        0, // Rotation delay distance in meters. This is how far the robot should travel before attempting to rotate. Optional
-        () -> {
-            // Boolean supplier that controls when the path will be mirrored for the red alliance
-            // This will flip the path being followed to the red side of the field.
-            // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+  
 
-            var alliance = DriverStation.getAlliance();
-            if (alliance.isPresent()) {
-                return alliance.get() == DriverStation.Alliance.Red;
-            }
-            return false;
-        },
-        this // Reference to drive subsystem to set requirements
-      );
-  }
 
-  /**
-   * Returns command to drive to amp.
-   * 
-   * @return Dynamic trajectory to drive to amp
-   */
-  public Command AmpLineupDynamicTrajectory() {
-    return pathfindThenFollowPath(
-      PathPlannerPath.fromPathFile(ampLineupPathName)
-    );
-  }
 
   /*◇─◇──◇─◇
      Setters
@@ -455,12 +408,12 @@ public class DriveSubsystem extends SubsystemBase implements Loggable{
    SmartDashboard.updateValues();
     
     // updates pose with current time, rotation, and module positions.
-    estimatedPose.updateWithTime(Timer.getFPGATimestamp(), Rotation2d.fromDegrees(getAngle()), getModulePositions());
+    //estimatedPose.updateWithTime(Timer.getFPGATimestamp(), Rotation2d.fromDegrees(getAngle()), getModulePositions());
 
     // updates pose with Lime Light positions
     
     
-    field.setRobotPose(estimatedPose.getEstimatedPosition());
-    this.resetOdometry(estimatedPose.getEstimatedPosition());
+    //field.setRobotPose(estimatedPose.getEstimatedPosition());
+    //this.resetOdometry(estimatedPose.getEstimatedPosition());
   }
 }

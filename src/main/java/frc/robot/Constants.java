@@ -33,28 +33,27 @@ public final class Constants {
 
   public static final class CANIds {
     // SPARK MAX and FLEX CAN IDs
-    public static final int kFrontLeftDrivingCanId = 47;
-    public static final int kFrontLeftTurningCanId = 13;
+    public static final int kFrontLeftDrivingCanId = 3;
+    public static final int kFrontLeftTurningCanId = 20;
 
-    public static final int kFrontRightDrivingCanId = 48;
-    public static final int kRearRightTurningCanId = 12;
+    public static final int kFrontRightDrivingCanId = 10;
+    public static final int kFrontRightTurningCanId = 14;
 
-    public static final int kRearLeftDrivingCanId = 49;
-    public static final int kRearLeftTurningCanId = 23;
+    public static final int kRearLeftDrivingCanId = 5;
+    public static final int kRearLeftTurningCanId = 17;
 
-    public static final int kRearRightDrivingCanId = 51;
-    public static final int kFrontRightTurningCanId = 36;
+    public static final int kRearRightDrivingCanId = 8;
+    public static final int kRearRightTurningCanId = 35;
 
 
     // Intake CAN IDs
 
-    public static final int kIntakeCanID = 10;
-    public static final int kIntakeTurnPitchCanID = 29;
+    public static final int kIntakeCanID = 0;
 
     // Shooter IDs
-    public static final int kShooterAngleMotorCanId = 8;
-    public static final int kShooterLeftMotorCanId = 59;
-    public static final int kShooterRightMotorCanId = 62;
+    public static final int kShooterLeftID = 0;
+    public static final int kShooterRightID = 0;
+    public static final int kShooterAngleID = 0;
 
     //
   }
@@ -148,30 +147,11 @@ public final class Constants {
     public static final int kTurningMotorCurrentLimit = 20; // amps
   }
 
-  public static final class FloopIntakeConstants {
-    public static final int kIntakePistonOut = 1;
-    public static final int kIntakePistonIn = 2;
-    public static final double intakeP = 0;
-    public static final double intakeI = 0;
-    public static final double intakeD = 0;
-    public static final double velocityConstraint = 0;
-    public static final double accelerationConstraint = 0;
 
+  public static final class ShooterConstants {
     
-
-    public static final class TransferConstants {
-    }
-
-    public static final class ShooterConstants {
-
-      public static final double shooterTopP = 0;
-      public static final double shooterTopI = 0;
-      public static final double shooterTopD = 0;
-      public static final double SHOOT = -0.15;
-
-    }
-
   }
+
 
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
@@ -197,15 +177,7 @@ public final class Constants {
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
         kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
 
-    public static final HolonomicPathFollowerConfig holonomicPathFollowerConfig = new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig,
-                                                                                                                   // this
-                                                                                                                   // should
-                                                                                                                   // likely
-                                                                                                                   // live
-                                                                                                                   // in
-                                                                                                                   // your
-                                                                                                                   // Constants
-                                                                                                                   // class
+    public static final HolonomicPathFollowerConfig holonomicPathFollowerConfig = new HolonomicPathFollowerConfig(// this should live in your constants class
         new PIDConstants(kPHoloTranslationController, 0.0, 0.0), // Translation PID constants
         new PIDConstants(kPHoloRotationController, 0.0, 0.0), // Rotation PID constants
         4.5, // Max module speed, in m/s
@@ -217,6 +189,11 @@ public final class Constants {
         kMaxAccelerationMetersPerSecondSquared,
         Units.radiansToDegrees(kMaxAngularSpeedRadiansPerSecond),
         Units.radiansToDegrees(kMaxAngularSpeedRadiansPerSecondSquared));
+  }
+
+
+  public static final class pathNameConstants {
+    public static final String goForth = "GO_FORTH";
   }
 
   public static final class NeoMotorConstants {

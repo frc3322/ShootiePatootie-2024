@@ -10,8 +10,9 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.Commands.AutoCommands;
 import frc.robot.Constants.OIConstants;
-import frc.robot.Constants.FloopIntakeConstants.ShooterConstants;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Shooter;
 import io.github.oblarg.oblog.Logger;
@@ -33,7 +34,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem robotDrive = new DriveSubsystem();
-  private final Shooter shooter = new Shooter();
+  //private final Shooter shooter = new Shooter();
+
+  private final AutoCommands autoCommands = new AutoCommands(robotDrive, null, null, null);
   
 
   // The driver's controller
@@ -54,9 +57,10 @@ public class RobotContainer {
     Logger.configureLoggingAndConfig(this, true);
 
     // Auton selector config
-    // autoSelector.setDefaultOption("Test", new Test4And1Auto());
+     //autoSelector.setDefaultOption("Test", new Test4And1Auto());
 
     autoSelector.addOption("No auto", null);
+    autoSelector.addOption("GO_FORTH", autoCommands.driveForward());
 
     // Configure default commands
 
@@ -96,44 +100,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    /*◇─◇──◇─◇
-     Drivetrain
-    ◇─◇──◇─◇*/
-
-    driverController.x()
-        .whileTrue(new RunCommand(
-            () -> robotDrive.setX(),
-            robotDrive));
-
-    driverController.start().onTrue(new InstantCommand(()->robotDrive.zeroHeading()));
-
-
-  /*◇─◇──◇─◇
-  ✨Shooter✨
-  ◇─◇──◇─◇*/
-  
-  driverController.y()
-        .whileTrue(new RunCommand(
-            () -> shooter.setShooterSpeed(ShooterConstants.SHOOT),
-            shooter));
-
-  driverController.a().whileTrue(new RunCommand(
-            () -> shooter.setShooterSpeed(0),
-            shooter));
-
-  driverController.b().whileTrue(new RunCommand(
-            () -> shooter.pointShooter(0.25),
-            shooter));
-            
-             driverController.b().whileFalse(new RunCommand(
-            () -> shooter.stopPointShooter(0),
-            shooter));
-  
-  /*◇─◇──◇─◇
-  ✨FloopIntake✨
-  ◇─◇──◇─◇*/
-
-
+    
 
 
    
