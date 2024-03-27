@@ -33,17 +33,17 @@ public final class Constants {
 
   public static final class CANIds {
     // SPARK MAX and FLEX CAN IDs
-    public static final int kFrontLeftDrivingCanId = 8;
-    public static final int kFrontLeftTurningCanId = 20;
+    public static final int kFrontLeftDrivingCanId = 3;
+    public static final int kFrontLeftTurningCanId = 14;
 
-    public static final int kFrontRightDrivingCanId = 5;
-    public static final int kFrontRightTurningCanId = 35;
+    public static final int kFrontRightDrivingCanId = 10;
+    public static final int kFrontRightTurningCanId = 17;
 
-    public static final int kRearLeftDrivingCanId = 10;
-    public static final int kRearLeftTurningCanId = 17;
+    public static final int kRearLeftDrivingCanId = 5;
+    public static final int kRearLeftTurningCanId = 35;
 
-    public static final int kRearRightDrivingCanId = 3;
-    public static final int kRearRightTurningCanId = 14;
+    public static final int kRearRightDrivingCanId = 8;
+    public static final int kRearRightTurningCanId = 20;
 
 
     // Intake CAN IDs
@@ -159,7 +159,7 @@ public final class Constants {
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
     public static final double kDriveDeadband = 0.09;
-    public static int kSecondaryControllerPort = 1;
+    public static final int kSecondaryControllerPort = 1;
   }
 
   public static final class AutoConstants {
@@ -203,6 +203,8 @@ public final class Constants {
     public static final double kFreeSpeedRpm = 5676;
 
     public static final int neo550CurrentLimitAmps = 20;
+
+    public static int currentLimit;
   }
 
   public static final class FieldConstants {

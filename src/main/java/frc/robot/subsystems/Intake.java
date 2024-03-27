@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CANIds;
 import io.github.oblarg.oblog.Loggable;
+import io.github.oblarg.oblog.annotations.Config;
 
 public class Intake extends SubsystemBase implements Loggable{
 
@@ -23,6 +24,8 @@ public class Intake extends SubsystemBase implements Loggable{
     /*◇─◇──◇─◇
     ✨Setters✨
     ◇─◇──◇─◇*/
+
+    @Config
     public void setIntakeSpeed(double speed){
         intakeMotor.set(speed);
     }

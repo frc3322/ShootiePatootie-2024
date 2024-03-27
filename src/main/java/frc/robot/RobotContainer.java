@@ -10,10 +10,13 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Commands.AutoCommands;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.NoteDetection;
 import frc.robot.subsystems.Shooter;
 import io.github.oblarg.oblog.Logger;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -34,6 +37,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem robotDrive = new DriveSubsystem();
+  private final Intake intake = new Intake();
+  private final NoteDetection noteDetection = new NoteDetection();
   //private final Shooter shooter = new Shooter();
 
   private final AutoCommands autoCommands = new AutoCommands(robotDrive, null, null, null);
@@ -81,11 +86,17 @@ public class RobotContainer {
                 true, true),
             robotDrive));
 
+    driverController.start().onTrue(new InstantCommand(() -> robotDrive.zeroHeading()));
+
+    driverController.a().onTrue(
+      robotDrive.goToNoteCommand(noteDetection.getClosestNote())
+    );
     /*
      * ◇─◇──◇─◇
      * Elevator
      * ◇─◇──◇─◇
      */
+    SmartDashboard.putData(autoSelector);
 
   }
 
